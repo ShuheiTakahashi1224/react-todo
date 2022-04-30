@@ -13,6 +13,11 @@ const App = () => {
 
   const addTask = () => {
     if (todoText === "") return;
+    if (incompleteTodoList.length >= 5) {
+      alert("登録できるTODOは５個までです。");
+      setTodoText("");
+      return;
+    }
     const newTodoList = [...incompleteTodoList, todoText];
     setIncompleteTodoList(newTodoList);
     setTodoText("");
