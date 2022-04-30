@@ -3,14 +3,8 @@ import "./styles.css";
 
 const App = () => {
   const [todoText, setTodoText] = useState("");
-  const [incompleteTodoList, setIncompleteTodoList] = useState([
-    "ああああああ",
-    "いいいいいいい"
-  ]);
-  const [completeTodoList, setCompleteTodoList] = useState([
-    "ううううううう",
-    "えええええええ"
-  ]);
+  const [incompleteTodoList, setIncompleteTodoList] = useState([]);
+  const [completeTodoList, setCompleteTodoList] = useState([]);
 
   const changeTodoText = (event) => setTodoText(event.target.value);
 
@@ -37,6 +31,18 @@ const App = () => {
     ];
     setIncompleteTodoList(newIncompleteTodoList);
     setCompleteTodoList(newCompleteTodoList);
+  };
+
+  const backTask = (index) => {
+    const newCompleteTodoList = [...completeTodoList];
+    newCompleteTodoList.splice(index, 1);
+
+    const newIncompleteTodoList = [
+      ...incompleteTodoList,
+      completeTodoList[index]
+    ];
+    setCompleteTodoList(newCompleteTodoList);
+    setIncompleteTodoList(newIncompleteTodoList);
   };
   return (
     <>
@@ -76,11 +82,13 @@ const App = () => {
       <div className="c-task p-complete_task">
         <p className="c-title">未完了のTODO</p>
         <ul className="c-task_list">
-          {completeTodoList.map((todo) => {
+          {completeTodoList.map((todo, index) => {
             return (
               <li key={todo} className="c-task_list__item">
                 <p className="c-task_list__item_name">{todo}</p>
-                <button className="c-button">戻す</button>
+                <button onClick={() => backTask(index)} className="c-button">
+                  戻す
+                </button>
               </li>
             );
           })}
