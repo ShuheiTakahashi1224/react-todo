@@ -1,3 +1,5 @@
+import Button from "./Button";
+
 const CompleteTodos = (props) => {
   const { todos, onClick } = props;
   return (
@@ -8,9 +10,7 @@ const CompleteTodos = (props) => {
           return (
             <li key={todo} className="c-task_list__item">
               <p className="c-task_list__item_name">{todo}</p>
-              <button onClick={() => onClick(index)} className="c-button">
-                戻す
-              </button>
+              <Button onClick={onClick} value={"戻す"} index={index} />
             </li>
           );
         })}

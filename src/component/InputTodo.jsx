@@ -1,17 +1,15 @@
+import { InputText, Button } from "./index";
+
 const InputTodo = (props) => {
   const { todoText, onChange, onClick } = props;
   return (
     <div className="c-task p-add_task">
-      <input
-        type="text"
-        placeholder="TODOを入力"
+      <InputText
         value={todoText}
-        className="c-input"
-        onChange={(event) => onChange(event)}
+        placeholder={"TODOを入力"}
+        onChange={onChange}
       />
-      <button onClick={() => onClick()} className="c-button">
-        追加
-      </button>
+      <Button value={"追加"} onClick={onClick} />
     </div>
   );
 };

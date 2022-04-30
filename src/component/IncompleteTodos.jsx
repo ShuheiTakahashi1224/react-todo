@@ -1,3 +1,5 @@
+import Button from "./Button";
+
 const IncompleteTodos = (props) => {
   const { todos, onClickComplete, onClickDelete } = props;
   return (
@@ -8,15 +10,8 @@ const IncompleteTodos = (props) => {
           return (
             <li key={todo} className="c-task_list__item">
               <p className="c-task_list__item_name">{todo}</p>
-              <button
-                onClick={() => onClickComplete(index)}
-                className="c-button"
-              >
-                完了
-              </button>
-              <button onClick={() => onClickDelete(index)} className="c-button">
-                削除
-              </button>
+              <Button value={"完了"} onClick={onClickComplete} index={index} />
+              <Button value={"削除"} onClick={onClickDelete} index={index} />
             </li>
           );
         })}
