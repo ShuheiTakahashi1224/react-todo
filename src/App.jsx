@@ -1,4 +1,7 @@
 import { useState } from "react";
+import InputTodo from "./component/InputTodo";
+import IncompleteTodos from "./component/IncompleteTodos";
+import CompleteTodos from "./component/CompleteTodos";
 import "./styles.css";
 
 const App = () => {
@@ -46,54 +49,17 @@ const App = () => {
   };
   return (
     <>
-      <div className="c-task p-add_task">
-        <input
-          type="text"
-          placeholder="TODOを入力"
-          value={todoText}
-          className="c-input"
-          onChange={(event) => changeTodoText(event)}
-        />
-        <button onClick={() => addTask()} className="c-button">
-          追加
-        </button>
-      </div>
-      <div className="c-task p-incomplete_task">
-        <p className="c-title">未完了のTODO</p>
-        <ul className="c-task_list">
-          {incompleteTodoList.map((todo, index) => {
-            return (
-              <li key={todo} className="c-task_list__item">
-                <p className="c-task_list__item_name">{todo}</p>
-                <button
-                  onClick={() => completeTask(index)}
-                  className="c-button"
-                >
-                  完了
-                </button>
-                <button onClick={() => deleteTask(index)} className="c-button">
-                  削除
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-      <div className="c-task p-complete_task">
-        <p className="c-title">未完了のTODO</p>
-        <ul className="c-task_list">
-          {completeTodoList.map((todo, index) => {
-            return (
-              <li key={todo} className="c-task_list__item">
-                <p className="c-task_list__item_name">{todo}</p>
-                <button onClick={() => backTask(index)} className="c-button">
-                  戻す
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      <InputTodo
+        todoText={todoText}
+        onChange={changeTodoText}
+        onClick={addTask}
+      />
+      <IncompleteTodos
+        todos={incompleteTodoList}
+        onClickComplete={completeTask}
+        onClickDelete={deleteTask}
+      />
+      <CompleteTodos todos={completeTodoList} onClick={backTask} />
     </>
   );
 };
