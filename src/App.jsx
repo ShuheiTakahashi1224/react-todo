@@ -13,6 +13,7 @@ const App = () => {
   ]);
 
   const changeTodoText = (event) => setTodoText(event.target.value);
+
   const addTask = () => {
     if (todoText === "") return;
     const newTodoList = [...incompleteTodoList, todoText];
@@ -24,6 +25,18 @@ const App = () => {
     const newTodoList = [...incompleteTodoList];
     newTodoList.splice(index, 1);
     setIncompleteTodoList(newTodoList);
+  };
+
+  const completeTask = (index) => {
+    const newIncompleteTodoList = [...incompleteTodoList];
+    newIncompleteTodoList.splice(index, 1);
+
+    const newCompleteTodoList = [
+      ...completeTodoList,
+      incompleteTodoList[index]
+    ];
+    setIncompleteTodoList(newIncompleteTodoList);
+    setCompleteTodoList(newCompleteTodoList);
   };
   return (
     <>
@@ -46,7 +59,12 @@ const App = () => {
             return (
               <li key={todo} className="c-task_list__item">
                 <p className="c-task_list__item_name">{todo}</p>
-                <button className="c-button">完了</button>
+                <button
+                  onClick={() => completeTask(index)}
+                  className="c-button"
+                >
+                  完了
+                </button>
                 <button onClick={() => deleteTask(index)} className="c-button">
                   削除
                 </button>
